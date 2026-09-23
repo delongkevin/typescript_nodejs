@@ -1,0 +1,18 @@
+version: "3.9"
+services:
+  wireless-workbench:
+    build: .
+    ports:
+      - "4000:4000"
+    environment:
+      NODE_ENV: production
+      PORT: 4000
+      STORAGE_BACKEND: file
+      DATA_DIR: /app/data
+      JWT_SECRET: ${JWT_SECRET:-dev-secret-change-me}
+    volumes:
+      - ww-data:/app/data
+    restart: unless-stopped
+
+volumes:
+  ww-data:
